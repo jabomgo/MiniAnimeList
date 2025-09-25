@@ -2,6 +2,8 @@ package br.ufpb.dcx.MiniAniList.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Review {
@@ -10,9 +12,11 @@ public class Review {
     private Long id;
 
     @Column(nullable = false)
+    @NotNull
     private float nota;
 
     @Column(length = 2000)
+    @Size(max = 2000)
     @NotBlank
     private String comentario;
 

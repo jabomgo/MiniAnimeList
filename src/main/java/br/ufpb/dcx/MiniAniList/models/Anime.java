@@ -2,6 +2,7 @@ package br.ufpb.dcx.MiniAniList.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,14 @@ public class Anime {
     private Long id;
 
     @Column(nullable = false, length = 256)
+    @Size(max = 256)
     private String titulo;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private String genero;
 
-    @Column
+    @Column(nullable = false)
     @NotNull
     private int episodios;
 

@@ -2,6 +2,9 @@ package br.ufpb.dcx.MiniAniList.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +15,17 @@ public class Usuario {
     private Long id;
 
     @Column(nullable = false, length = 256)
+    @Size(max = 256)
     private String nome;
 
     @Column(nullable = false, unique = true, length = 128)
+    @NotNull
+    @Size(max = 128)
     @Email
     private String email;
 
     @Column(nullable = false, length = 128)
+    @Size(min = 8, max = 128)
     private String senha;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
