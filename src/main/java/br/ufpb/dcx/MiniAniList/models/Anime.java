@@ -17,7 +17,7 @@ public class Anime {
     @Size(max = 256)
     private String titulo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 256)
     @NotNull
     private String genero;
 
