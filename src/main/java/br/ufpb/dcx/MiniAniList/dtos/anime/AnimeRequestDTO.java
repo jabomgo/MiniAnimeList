@@ -12,5 +12,30 @@ public class AnimeRequestDTO {
 
     @NotNull
     private int episodios;
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public int getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(int episodios) {
+        this.episodios = episodios;
+    }
+
 }
 
