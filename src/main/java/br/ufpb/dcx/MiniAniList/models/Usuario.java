@@ -2,6 +2,8 @@ package br.ufpb.dcx.MiniAniList.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -9,13 +11,38 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column
+    @Column(nullable = false, length = 256)
     private String nome;
 
-    @Column
+    @Column(nullable = false, unique = true, length = 128)
     @Email
     private String email;
 
-    @Column
+    @Column(nullable = false, length = 128)
     private String senha;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ListaUsuario> listaAnimes = new ArrayList<>();
+
+    public Usuario() {}
+
+    public Long getId() { return id; }
+
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getSenha() { return senha; }
+    public void setSenha(String senha) { this.senha = senha; }
+
+    public List<Review> getReviews() { return reviews; }
+    public void setReviews(List<Review> reviews) { this.reviews = reviews; }
+
+    public List<ListaUsuario> getListaAnimes() { return listaAnimes; }
+    public void setListaAnimes(List<ListaUsuario> listaAnimes) { this.listaAnimes = listaAnimes; }
 }
