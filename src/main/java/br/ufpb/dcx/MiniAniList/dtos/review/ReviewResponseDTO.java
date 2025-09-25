@@ -1,4 +1,4 @@
-package br.ufpb.dcx.MiniAniList.dtos;
+package br.ufpb.dcx.MiniAniList.dtos.review;
 
 public class ReviewResponseDTO {
     private Long id;

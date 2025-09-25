@@ -1,4 +1,4 @@
-package br.ufpb.dcx.MiniAniList.dtos;
+package br.ufpb.dcx.MiniAniList.dtos.anime;
 
 public class AnimeResponseDTO {
     private Long id;

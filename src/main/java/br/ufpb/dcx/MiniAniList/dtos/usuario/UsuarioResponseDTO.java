@@ -1,4 +1,4 @@
-package br.ufpb.dcx.MiniAniList.dtos;
+package br.ufpb.dcx.MiniAniList.dtos.usuario;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package br.ufpb.dcx.MiniAniList.dtos;
+package br.ufpb.dcx.MiniAniList.dtos.listaUsuario;
 
 public class ListaUsuarioResponseDTO {
     private Long id;

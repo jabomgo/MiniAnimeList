@@ -1,4 +1,4 @@
-package br.ufpb.dcx.MiniAniList.dtos;
+package br.ufpb.dcx.MiniAniList.dtos.anime;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
