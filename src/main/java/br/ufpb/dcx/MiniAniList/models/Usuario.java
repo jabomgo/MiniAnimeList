@@ -52,4 +52,8 @@ public class Usuario {
 
     public List<ListaUsuario> getListaAnimes() { return listaAnimes; }
     public void setListaAnimes(List<ListaUsuario> listaAnimes) { this.listaAnimes = listaAnimes; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

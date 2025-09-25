@@ -45,7 +45,7 @@ public class Review {
         return nota;
     }
 
-    public void setNota(int nota) {
+    public void setNota(float nota) {
         this.nota = nota;
     }
 
@@ -71,5 +71,9 @@ public class Review {
 
     public void setAnime(Anime anime) {
         this.anime = anime;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
