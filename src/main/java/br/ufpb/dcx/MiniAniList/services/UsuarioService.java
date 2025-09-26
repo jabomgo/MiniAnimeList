@@ -20,15 +20,6 @@ public class UsuarioService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public UsuarioResponseDTO criar(UsuarioCreateDTO requestDTO) {
-        Usuario usuario = new Usuario();
-        usuario.setNome(requestDTO.getNome());
-        usuario.setEmail(requestDTO.getEmail());
-        usuario.setSenha(requestDTO.getSenha());
-
-        return convertToResponseDTO(usuarioRepository.save(usuario));
-    }
-
     public UsuarioResponseDTO buscarPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         return convertToResponseDTO(usuario);
