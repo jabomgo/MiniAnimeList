@@ -1,26 +1,22 @@
 package br.ufpb.dcx.MiniAniList.dtos.usuario;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class UsuarioResponseDTO {
-
+public class UsuarioCreateDTO {
     @NotNull
-    @NotBlank
-    private Long id;
-
     @Size(max = 256)
     private String nome;
+
+    @NotNull
+    @Email
+    @Size(max = 128)
     private String email;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @NotNull
+    @Size(min = 8, max = 128)
+    private String senha;
 
     public String getNome() {
         return nome;
@@ -37,4 +33,13 @@ public class UsuarioResponseDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }
+
