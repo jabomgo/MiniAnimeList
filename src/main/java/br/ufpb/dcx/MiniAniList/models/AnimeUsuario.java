@@ -3,7 +3,7 @@ package br.ufpb.dcx.MiniAniList.models;
 import jakarta.persistence.*;
 
 @Entity
-public class ListaUsuario {
+public class AnimeUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -16,11 +16,11 @@ public class ListaUsuario {
     @JoinColumn(name = "anime_id")
     private Anime anime;
 
-    public ListaUsuario() {}
+    public AnimeUsuario() {}
 
     private String status;
 
-    public ListaUsuario(Usuario usuario, Anime anime, String status) {
+    public AnimeUsuario(Usuario usuario, Anime anime, String status) {
         this.usuario = usuario;
         this.anime = anime;
         this.status = status;

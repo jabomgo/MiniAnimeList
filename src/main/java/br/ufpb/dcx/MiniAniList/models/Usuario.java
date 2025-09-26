@@ -32,7 +32,7 @@ public class Usuario {
     private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ListaUsuario> listaAnimes = new ArrayList<>();
+    private List<AnimeUsuario> listaAnimes = new ArrayList<>();
 
     public Usuario() {}
 
@@ -50,8 +50,8 @@ public class Usuario {
     public List<Review> getReviews() { return reviews; }
     public void setReviews(List<Review> reviews) { this.reviews = reviews; }
 
-    public List<ListaUsuario> getListaAnimes() { return listaAnimes; }
-    public void setListaAnimes(List<ListaUsuario> listaAnimes) { this.listaAnimes = listaAnimes; }
+    public List<AnimeUsuario> getListaAnimes() { return listaAnimes; }
+    public void setListaAnimes(List<AnimeUsuario> listaAnimes) { this.listaAnimes = listaAnimes; }
 
     public void setId(Long id) {
         this.id = id;

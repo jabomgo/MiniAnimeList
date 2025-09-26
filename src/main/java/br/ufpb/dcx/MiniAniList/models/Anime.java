@@ -29,7 +29,7 @@ public class Anime {
     private List<Review> reviews = new ArrayList<>();
 
     @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ListaUsuario> listaUsuarios = new ArrayList<>();
+    private List<AnimeUsuario> animesUsuario = new ArrayList<>();
 
     public String getTitulo() {
         return titulo;
@@ -63,12 +63,12 @@ public class Anime {
         this.reviews = reviews;
     }
 
-    public List<ListaUsuario> getListaUsuarios() {
-        return listaUsuarios;
+    public List<AnimeUsuario> getListaUsuarios() {
+        return animesUsuario;
     }
 
-    public void setListaUsuarios(List<ListaUsuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
+    public void setListaUsuarios(List<AnimeUsuario> animesUsuario) {
+        this.animesUsuario = animesUsuario;
     }
 
     public Long getId() {
