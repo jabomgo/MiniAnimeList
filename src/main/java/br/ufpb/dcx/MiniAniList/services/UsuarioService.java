@@ -4,6 +4,7 @@ import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioCreateDTO;
 import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioResponseDTO;
 import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioUpdateDTO;
 import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioUpdatePasswordDTO;
+import br.ufpb.dcx.MiniAniList.models.Role;
 import br.ufpb.dcx.MiniAniList.models.Usuario;
 import br.ufpb.dcx.MiniAniList.repository.UsuarioRepository;
 import org.springframework.data.domain.Page;
@@ -44,6 +45,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
+        usuario.setRole(Role.USER);
 
         usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha()));
 
@@ -56,7 +58,6 @@ public class UsuarioService {
 
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
-
         usuario = usuarioRepository.save(usuario);
         return convertToResponseDTO(usuario);
     }
