@@ -1,10 +1,36 @@
 # MiniAniList
 
-O **MiniAniList** é uma aplicação acadêmica desenvolvida em Java com Spring Boot que simula um sistema de catálogo de animes inspirado no MyAnimeList.  
+O **MiniAniList** é uma aplicação acadêmica em Java com Spring Boot que simula um catálogo de animes inspirado no MyAnimeList.  
+Permite criar usuários, adicionar animes à lista pessoal, avaliar obras e escrever reviews.
 
-O projeto permite que usuários registrem perfis, adicionem animes à sua lista pessoal, avaliem obras e escrevam reviews, explorando conceitos: 
-- REST APIs, 
-- Spring Data JPA, 
-- validações, 
+Explorando conceitos:
+- REST APIs,
+- Spring Data JPA,
+- validações,
 - DTOs,
-- autenticação.
+- Autenticação.
+
+> Usa banco H2 local com persistência, por motivos de simplicidade.
+
+---
+
+## Pré-requisitos
+
+- Java 17+
+- Maven
+
+---
+
+## Executando o projeto
+
+1. **Clonar repositório**
+```bash
+git clone https://github.com/jabomgo/MiniAnimeList
+cd MiniAniList
+```
+
+2. **Rodar a aplicação**
+
+```bash
+mvn spring-boot:run
+```
