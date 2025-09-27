@@ -27,7 +27,7 @@ public class ReviewController {
         return reviewService.buscarReviewPorId(id);
     }
 
-    @GetMapping("/reviews/anime/{animeId}")
+    @GetMapping("/animes/{animeId}/review")
     public List<ReviewResponseDTO> listarReviewsPorAnime(@PathVariable Long animeId) {
         return reviewService.listarReviewsPorAnime(animeId);
     }
