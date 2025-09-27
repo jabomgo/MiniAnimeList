@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/reviews/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/reviews/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/usuarios/*/lista").hasRole("USER")
 
                         // Qualquer outra rota precisa de autenticação
                         .anyRequest().authenticated()
