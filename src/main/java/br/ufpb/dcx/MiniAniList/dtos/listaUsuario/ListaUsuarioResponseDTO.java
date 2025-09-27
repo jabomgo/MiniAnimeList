@@ -1,8 +1,22 @@
 package br.ufpb.dcx.MiniAniList.dtos.listaUsuario;
 
 public class ListaUsuarioResponseDTO {
-    private Long id;
     private String nomeAnime;
     private String status;
-    private Integer progresso;
+
+    public String getNomeAnime() {
+        return nomeAnime;
+    }
+
+    public void setNomeAnime(String nomeAnime) {
+        this.nomeAnime = nomeAnime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
