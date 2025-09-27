@@ -4,10 +4,9 @@ import br.ufpb.dcx.MiniAniList.dtos.anime.AnimeRequestDTO;
 import br.ufpb.dcx.MiniAniList.dtos.anime.AnimeResponseDTO;
 import br.ufpb.dcx.MiniAniList.models.Anime;
 import br.ufpb.dcx.MiniAniList.repository.AnimeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AnimeService {
@@ -23,16 +22,15 @@ public class AnimeService {
         anime.setTitulo(dto.getTitulo());
         anime.setGenero(dto.getGenero());
         anime.setEpisodios(dto.getEpisodios());
+        anime.setDescricao(dto.getDescricao());
 
         Anime salvo = animeRepository.save(anime);
         return mapParaResponseDTO(salvo);
     }
 
-    public List<AnimeResponseDTO> listarAnimes() {
-        return animeRepository.findAll()
-                .stream()
-                .map(this::mapParaResponseDTO)
-                .collect(Collectors.toList());
+    public Page<AnimeResponseDTO> listarAnimes(Pageable pageable) {
+        return animeRepository.findAll(pageable)
+                .map(this::mapParaResponseDTO);
     }
 
     public AnimeResponseDTO buscarAnimePorId(Long id) {
@@ -47,6 +45,7 @@ public class AnimeService {
         anime.setTitulo(dto.getTitulo());
         anime.setGenero(dto.getGenero());
         anime.setEpisodios(dto.getEpisodios());
+        anime.setDescricao(dto.getDescricao());
 
         Anime atualizado = animeRepository.save(anime);
         return mapParaResponseDTO(atualizado);
@@ -64,6 +63,7 @@ public class AnimeService {
         dto.setTitulo(anime.getTitulo());
         dto.setGenero(anime.getGenero());
         dto.setEpisodios(anime.getEpisodios());
+        dto.setDescricao(anime.getDescricao());
 
         return dto;
     }

@@ -17,6 +17,10 @@ public class Anime {
     @Size(max = 256)
     private String titulo;
 
+    @Column(length = 256)
+    @Size(max = 256)
+    private String descricao;
+
     @Column(nullable = false, length = 256)
     @NotNull
     private String genero;
@@ -30,6 +34,22 @@ public class Anime {
 
     @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AnimeUsuario> animesUsuario = new ArrayList<>();
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public List<AnimeUsuario> getAnimesUsuario() {
+        return animesUsuario;
+    }
+
+    public void setAnimesUsuario(List<AnimeUsuario> animesUsuario) {
+        this.animesUsuario = animesUsuario;
+    }
 
     public String getTitulo() {
         return titulo;

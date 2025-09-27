@@ -13,6 +13,17 @@ public class AnimeRequestDTO {
     @NotNull
     private int episodios;
 
+    @Size(max = 256)
+    private String descricao;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public String getTitulo() {
         return titulo;
     }
