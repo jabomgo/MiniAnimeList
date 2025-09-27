@@ -73,6 +73,7 @@ public class UsuarioService {
 
     private UsuarioResponseDTO convertToResponseDTO(Usuario usuario) {
         UsuarioResponseDTO responseDTO = new UsuarioResponseDTO();
+        responseDTO.setId(usuario.getId());
         responseDTO.setEmail(usuario.getEmail());
         responseDTO.setNome(usuario.getNome());
         return responseDTO;
