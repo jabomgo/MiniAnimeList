@@ -34,3 +34,6 @@ cd MiniAniList
 ```bash
 mvn spring-boot:run
 ```
+
+# Base usada para criar o banco
+https://www.kaggle.com/datasets/bhavyadhingra00020/top-anime-dataset-2024
