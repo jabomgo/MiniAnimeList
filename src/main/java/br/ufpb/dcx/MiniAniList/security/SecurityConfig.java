@@ -29,13 +29,13 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/auth/**").permitAll()
 
+                        // Usuário autenticado (role USER)
+                        .requestMatchers(HttpMethod.POST, "/usuarios/*/lista/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/reviews/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/reviews/**").hasRole("USER")
+
                         // Endpoints restritos a ADMIN
                         .requestMatchers("/usuarios/**").hasRole("ADMIN")
-
-                        // Usuário autenticado (role USER)
-                        .requestMatchers(HttpMethod.POST, "/reviews/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.PUT, "/reviews/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("USER")
 
                         // Qualquer outra rota precisa de autenticação
                         .anyRequest().authenticated()

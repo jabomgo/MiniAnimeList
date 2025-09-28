@@ -67,6 +67,14 @@ public class Usuario implements UserDetails {
 
     public Usuario() {}
 
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        if (role != null) {
+            roles.add(role.name());
+        }
+        return roles;
+    }
+
     public Long getId() { return id; }
 
     public String getNome() { return nome; }
