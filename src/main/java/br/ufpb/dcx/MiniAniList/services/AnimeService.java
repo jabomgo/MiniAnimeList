@@ -2,6 +2,7 @@ package br.ufpb.dcx.MiniAniList.services;
 
 import br.ufpb.dcx.MiniAniList.dtos.anime.AnimeRequestDTO;
 import br.ufpb.dcx.MiniAniList.dtos.anime.AnimeResponseDTO;
+import br.ufpb.dcx.MiniAniList.exceptions.ItemNotFoundExeption;
 import br.ufpb.dcx.MiniAniList.models.Anime;
 import br.ufpb.dcx.MiniAniList.repository.AnimeRepository;
 import org.springframework.data.domain.Page;
@@ -34,13 +35,13 @@ public class AnimeService {
     }
 
     public AnimeResponseDTO buscarAnimePorId(Long id) {
-        Anime anime = animeRepository.findById(id).orElseThrow(() -> new RuntimeException("Anime não encontrado"));
+        Anime anime = animeRepository.findById(id).orElseThrow(() -> new ItemNotFoundExeption("Anime não encontrado"));
         return mapParaResponseDTO(anime);
     }
 
     public AnimeResponseDTO atualizarAnime(Long id, AnimeRequestDTO dto) {
         Anime anime = animeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Anime não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Anime não encontrado"));
 
         anime.setTitulo(dto.getTitulo());
         anime.setGenero(dto.getGenero());
@@ -53,7 +54,7 @@ public class AnimeService {
 
     public void deletarAnime(Long id) {
         Anime anime = animeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Anime não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Anime não encontrado"));
         animeRepository.delete(anime);
     }
 

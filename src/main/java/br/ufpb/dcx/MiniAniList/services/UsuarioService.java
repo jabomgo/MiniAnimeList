@@ -4,6 +4,7 @@ import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioCreateDTO;
 import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioResponseDTO;
 import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioUpdateDTO;
 import br.ufpb.dcx.MiniAniList.dtos.usuario.UsuarioUpdatePasswordDTO;
+import br.ufpb.dcx.MiniAniList.exceptions.ItemNotFoundExeption;
 import br.ufpb.dcx.MiniAniList.models.Role;
 import br.ufpb.dcx.MiniAniList.models.Usuario;
 import br.ufpb.dcx.MiniAniList.repository.UsuarioRepository;
@@ -25,12 +26,12 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDTO buscarPorId(Long id) {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado"));
         return convertToResponseDTO(usuario);
     }
 
     public UsuarioResponseDTO updatePassword(UsuarioUpdatePasswordDTO dto) {
-        Usuario usuario = usuarioRepository.findById(dto.getId()).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Usuario usuario = usuarioRepository.findById(dto.getId()).orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado"));
 
         if (!bCryptPasswordEncoder.matches(dto.getSenhaAntiga(), usuario.getSenha())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha antiga incorreta");
@@ -54,7 +55,7 @@ public class UsuarioService {
 
     public UsuarioResponseDTO updateUsuario(UsuarioUpdateDTO dto) {
         Usuario usuario = usuarioRepository.findById(dto.getId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado"));
 
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
@@ -68,7 +69,7 @@ public class UsuarioService {
     }
 
     public void deletarUsuario(Long id){
-        Usuario usuarioToDelete = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Usuario usuarioToDelete = usuarioRepository.findById(id).orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado"));
         usuarioRepository.delete(usuarioToDelete);
     }
 

@@ -2,6 +2,7 @@ package br.ufpb.dcx.MiniAniList.services;
 
 import br.ufpb.dcx.MiniAniList.dtos.auth.AuthRequestDTO;
 import br.ufpb.dcx.MiniAniList.dtos.auth.AuthResponseDTO;
+import br.ufpb.dcx.MiniAniList.exceptions.ItemNotFoundExeption;
 import br.ufpb.dcx.MiniAniList.repository.UsuarioRepository;
 import br.ufpb.dcx.MiniAniList.security.JwtService;
 import jakarta.validation.Valid;
@@ -31,7 +32,7 @@ public class AuthenticationService {
         );
 
         var user = userRepository.findByEmail(authRequestDTO.getEmail())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado após autenticação bem-sucedida."));
+                .orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado após autenticação bem-sucedida."));
 
         String token = jwtService.generateToken(user);
 

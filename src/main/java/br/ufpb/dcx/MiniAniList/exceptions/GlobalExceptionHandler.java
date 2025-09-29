@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleRuntimeException(RuntimeException exception, HttpServletRequest request) {
+    public ErrorResponse defaultHandler(RuntimeException exception, HttpServletRequest request) {
         return new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
@@ -20,12 +20,23 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(UnauthorizedUserOperationException.class)
+    @ExceptionHandler(UnauthorizedUserOperationsExeption.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ErrorResponse handleUnauthorizedUserOperation(UnauthorizedUserOperationException exception, HttpServletRequest request) {
+    public ErrorResponse handleUnauthorizedUserOperation(UnauthorizedUserOperationsExeption exception, HttpServletRequest request) {
         return new ErrorResponse(
                 HttpStatus.FORBIDDEN.value(),
                 HttpStatus.FORBIDDEN.getReasonPhrase(),
+                exception.getMessage(),
+                request.getRequestURI()
+        );
+    }
+
+    @ExceptionHandler(ItemNotFoundExeption.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleNotFound(ItemNotFoundExeption exception, HttpServletRequest request){
+        return new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
                 exception.getMessage(),
                 request.getRequestURI()
         );

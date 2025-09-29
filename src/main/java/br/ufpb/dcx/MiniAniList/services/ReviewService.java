@@ -2,6 +2,7 @@ package br.ufpb.dcx.MiniAniList.services;
 
 import br.ufpb.dcx.MiniAniList.dtos.review.ReviewRequestDTO;
 import br.ufpb.dcx.MiniAniList.dtos.review.ReviewResponseDTO;
+import br.ufpb.dcx.MiniAniList.exceptions.ItemNotFoundExeption;
 import br.ufpb.dcx.MiniAniList.models.Anime;
 import br.ufpb.dcx.MiniAniList.models.Review;
 import br.ufpb.dcx.MiniAniList.models.Usuario;
@@ -33,10 +34,10 @@ public class ReviewService {
     @Transactional
     public ReviewResponseDTO criarReview(ReviewRequestDTO requestDTO) {
         Anime anime = animeRepository.findById(requestDTO.getAnimeId())
-                .orElseThrow(() -> new RuntimeException("Anime não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Anime não encontrado"));
 
         Usuario usuario = usuarioRepository.findById(requestDTO.getUsuarioId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado"));
 
         Review review = new Review();
         review.setAnime(anime);
@@ -50,7 +51,7 @@ public class ReviewService {
 
     public ReviewResponseDTO buscarReviewPorId(Long id) {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Review não encontrada"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Review não encontrada"));
         return converteParaResponseDTO(review);
     }
 
@@ -63,7 +64,7 @@ public class ReviewService {
 
     public ReviewResponseDTO atualizarReview(Long id, ReviewRequestDTO requestDTO) {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Review não encontrada"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Review não encontrada"));
 
         if (requestDTO.getComentario() != null) {
             review.setComentario(requestDTO.getComentario());
@@ -79,7 +80,7 @@ public class ReviewService {
     @Transactional
     public void deletarReview(Long id) {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Review não encontrada"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Review não encontrada"));
         reviewRepository.delete(review);
     }
 

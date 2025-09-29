@@ -1,6 +1,8 @@
 package br.ufpb.dcx.MiniAniList.services;
 
 import br.ufpb.dcx.MiniAniList.dtos.listaUsuario.ListaUsuarioRequestDTO;
+import br.ufpb.dcx.MiniAniList.exceptions.ItemNotFoundExeption;
+import br.ufpb.dcx.MiniAniList.exceptions.UnauthorizedUserOperationsExeption;
 import br.ufpb.dcx.MiniAniList.models.Anime;
 import br.ufpb.dcx.MiniAniList.models.AnimeUsuario;
 import br.ufpb.dcx.MiniAniList.models.Usuario;
@@ -32,17 +34,17 @@ public class ListaService {
 
     public AnimeUsuario adicionarAnimeNaLista(ListaUsuarioRequestDTO dto) {
         Usuario usuarioAlvo = usuarioRepository.findById(dto.getUsuarioId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado"));
 
         Anime anime = animeRepository.findById(dto.getAnimeId())
-                .orElseThrow(() -> new RuntimeException("Anime não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Anime não encontrado"));
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuarioLogado = usuarioRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new RuntimeException("Usuário logado não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Usuário logado não encontrado"));
 
         if (!usuarioLogado.getRoles().contains("ADMIN") && !usuarioLogado.getId().equals(usuarioAlvo.getId())) {
-            throw new RuntimeException("Você não pode modificar a lista de outro usuário");
+            throw new UnauthorizedUserOperationsExeption("Você não pode modificar a lista de outro usuário");
         }
 
         AnimeUsuario animeUsuario = new AnimeUsuario(usuarioAlvo, anime, dto.getStatus());
@@ -51,14 +53,14 @@ public class ListaService {
 
     public void deletarAnimeDaListaDoUsuario(Long usuarioId, Long animeId) {
         Usuario usuarioAlvo = usuarioRepository.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Usuário não encontrado"));
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Usuario usuarioLogado = usuarioRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new RuntimeException("Usuário logado não encontrado"));
+                .orElseThrow(() -> new ItemNotFoundExeption("Usuário logado não encontrado"));
 
         if (!usuarioLogado.getRoles().contains("ADMIN") && !usuarioLogado.getId().equals(usuarioAlvo.getId())) {
-            throw new RuntimeException("Você não pode modificar a lista de outro usuário");
+            throw new UnauthorizedUserOperationsExeption("Você não pode modificar a lista de outro usuário");
         }
 
         listaAnimeUsuarioRepository.deleteByUsuarioIdAndAnimeId(usuarioId, animeId);
