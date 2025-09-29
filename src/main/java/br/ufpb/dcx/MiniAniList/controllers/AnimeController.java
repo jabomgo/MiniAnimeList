@@ -23,8 +23,11 @@ public class AnimeController {
     }
 
     @GetMapping(path = "/animes")
-    public Page<AnimeResponseDTO> buscarAnimes(Pageable pageable){
-        return animeService.listarAnimes(pageable);
+    public Page<AnimeResponseDTO> buscarAnimes(Pageable pageable,
+                                               @RequestParam(required = false) String titulo,
+                                               @RequestParam(required = false) String genero
+    ){
+        return animeService.listarAnimes(pageable, titulo, genero);
     }
 
     @GetMapping(path = "/animes/{animeId}")

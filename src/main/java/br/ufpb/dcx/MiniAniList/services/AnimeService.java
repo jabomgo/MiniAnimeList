@@ -29,9 +29,23 @@ public class AnimeService {
         return mapParaResponseDTO(salvo);
     }
 
-    public Page<AnimeResponseDTO> listarAnimes(Pageable pageable) {
-        return animeRepository.findAll(pageable)
-                .map(this::mapParaResponseDTO);
+    public Page<AnimeResponseDTO> listarAnimes(Pageable pageable, String titulo, String genero) {
+        if (titulo != null && genero != null) {
+            return animeRepository
+                    .findByTituloContainingIgnoreCaseAndGeneroContainingIgnoreCase(titulo, genero, pageable)
+                    .map(this::mapParaResponseDTO);
+        } else if (titulo != null) {
+            return animeRepository
+                    .findByTituloContainingIgnoreCase(titulo, pageable)
+                    .map(this::mapParaResponseDTO);
+        } else if (genero != null) {
+            return animeRepository
+                    .findByGeneroContainingIgnoreCase(genero, pageable)
+                    .map(this::mapParaResponseDTO);
+        } else {
+            return animeRepository.findAll(pageable)
+                    .map(this::mapParaResponseDTO);
+        }
     }
 
     public AnimeResponseDTO buscarAnimePorId(Long id) {
